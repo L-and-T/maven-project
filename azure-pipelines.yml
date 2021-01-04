@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: Maven@3
+  displayName: Validate
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'validate'
@@ -21,3 +22,60 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
+   
+- task: Maven@3
+  displayName: Compile
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'compile'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+
+- task: Maven@3
+  displayName: Test
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'test'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+
+- task: Maven@3
+  displayName: Package
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'Package'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+
+- task: Maven@3
+  displayName: verify
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'verify'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+
+
+
+    
+
